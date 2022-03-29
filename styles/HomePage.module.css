@@ -1,0 +1,17 @@
+/** @format */
+
+/* body {
+	background: #ededed;
+} */
+.grid {
+	display: grid;
+	grid-gap: 0 15px;
+	margin: 15px;
+	grid-template-columns: 20% 1fr;
+}
+.sidebar {
+	box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+	border-radius: 3px;
+	padding: 15px;
+	background: #fff;
+}
