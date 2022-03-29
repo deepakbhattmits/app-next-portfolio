@@ -1,20 +1,27 @@
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { getSession, useSession, signIn, signOut } from "next-auth/react";
+import { getSession, signIn, signOut } from "next-auth/react";
 import Modal from "../components/Modal";
 import useQuestions from "../hooks/useQuetions";
 import usePost from "../hooks/usePost";
 import styles from "../styles/Questions.module.scss";
 import useAnswer from "../hooks/useAnswer";
+import useDelete from "../hooks/useDelete";
 import { GetServerSideProps } from "next";
+import ErrorNotification from "../components/reusable/ErrorNotification";
+import LoadingNotification from "../components/reusable/LoadingNotification";
+import SuccessNotification from "../components/reusable/SuccessNotification";
 
 const Questions = ({ session }) => {
   const [filteredData, setFilteredData] = useState<any[]>([]);
   const answerRef = useRef<HTMLSpanElement>(null);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [question, setQuestion] = useState<number>(0);
+  const [deleteQuestion, setDeleteQuestion] = useState<string>("");
+
   const { answerInfo } = useAnswer(question);
   const { queryInfo } = useQuestions();
+  const deleteMutation = useDelete();
   const postMutation = usePost();
   const handleAddQuestion = () => {
     setIsModalVisible((prevState) => !prevState);
@@ -22,32 +29,42 @@ const Questions = ({ session }) => {
   const handleDismiss = (e: any) => {
     setIsModalVisible((prevState) => !prevState);
   };
-  const handleQuestion = (id: any) => {
+  const handleQuestion = (e: any, id: any) => {
+    e.stopPropagation();
     setQuestion((prevState) => (prevState === 0 ? id : 0));
+  };
+  const handleRemove = (id: string) => {
+    deleteMutation.mutate(id);
   };
   useEffect(() => {
     if (
+      (postMutation?.isSuccess && !queryInfo?.isFetching) ||
       (queryInfo?.isSuccess && !filteredData?.length) ||
-      filteredData?.length < queryInfo?.data?.questions?.length
+      filteredData?.length > queryInfo?.data?.questions?.length
     ) {
       setFilteredData(queryInfo?.data?.questions);
     }
   }, [filteredData, queryInfo]);
-  // useEffect(() => {
-  //   const i_id = setInterval(() => {
-  //     if (postMutation.isSuccess && !queryInfo.isFetching) {
-  //       // postMutation.reset();
-  //       // setIsModalVisible(false);
-  //       // signOut();
-  //     }
-  //     // if (postMutation.isError && !queryInfo.isFetching) {
-  //     //   // postMutation.reset();
-  //     // }
-  //   }, 1000);
-  //   return () => {
-  //     clearInterval(i_id);
-  //   };
-  // }, [postMutation, queryInfo]);
+  useEffect(() => {
+    const i_id = setInterval(() => {
+      if (
+        (postMutation?.isSuccess && !queryInfo?.isFetching) ||
+        (postMutation?.isError && !queryInfo?.isFetching) ||
+        (deleteMutation?.isSuccess && !queryInfo?.isFetching) ||
+        (deleteMutation?.isError && !queryInfo?.isFetching)
+      ) {
+        postMutation?.reset();
+        deleteMutation?.reset();
+        // setIsModalVisible(false);
+      }
+      // if (postMutation.isError && !queryInfo.isFetching) {
+      //   // postMutation.reset();
+      // }
+    }, 1000);
+    return () => {
+      clearInterval(i_id);
+    };
+  }, [postMutation, queryInfo]);
   return (
     <div className={styles?.question__container}>
       <div className={`${styles.padding__top__bottom1} ${styles.center}`}>
@@ -69,11 +86,11 @@ const Questions = ({ session }) => {
         <div>Loading....</div>
       ) : !!filteredData?.length ? (
         <div className={`ui styled fluid accordion ${styles.customAccordion}`}>
-          {filteredData?.map(({ que, id }) => (
+          {filteredData?.map(({ que, id, userId }) => (
             <Fragment key={id}>
               <div
                 className={`title animating ${question === id ? "active" : ""}`}
-                onClick={() => handleQuestion(id)}
+                onClick={(e) => handleQuestion(e, id)}
               >
                 <i
                   className={`angle ${
@@ -81,6 +98,14 @@ const Questions = ({ session }) => {
                   } icon`}
                 />
                 {que}
+                {!!session && session?.user?.id === userId ? (
+                  <button
+                    className="btn btn-border btn-secondary"
+                    onClick={() => handleRemove(id)}
+                  >
+                    Remove
+                  </button>
+                ) : null}
               </div>
               <div
                 className={`content animating ${
@@ -102,8 +127,8 @@ const Questions = ({ session }) => {
           ))}
         </div>
       ) : null}
-      {/* {console.log("session : ", session)} */}
       <Modal
+        userId={session?.user?.id}
         isModalVisible={isModalVisible}
         handleDismiss={handleDismiss}
         postMutation={postMutation}
@@ -138,6 +163,20 @@ const Questions = ({ session }) => {
           ) : null
         }
       />
+      {postMutation?.isLoading || deleteMutation?.isLoading ? (
+        <LoadingNotification />
+      ) : postMutation?.isError || deleteMutation?.isError ? (
+        <ErrorNotification
+          text={
+            (postMutation?.error as any)?.response?.data ||
+            (deleteMutation?.error as any)?.response?.data
+          }
+        />
+      ) : postMutation?.isSuccess || deleteMutation?.isSuccess ? (
+        <SuccessNotification
+          text={postMutation?.data?.message || deleteMutation?.data?.message}
+        />
+      ) : null}
       <style jsx>
         {`
           .ui.styled.accordion {
