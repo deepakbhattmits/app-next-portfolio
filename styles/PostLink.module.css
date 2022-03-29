@@ -1,0 +1,13 @@
+/** @format */
+
+.article {
+	width: 100%;
+}
+.article a {
+	border-radius: 3px;
+	border: 1px solid;
+	padding: 5px;
+	margin: 5px 0;
+	width: calc(100% - 100px);
+	display: block;
+}
