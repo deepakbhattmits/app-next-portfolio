@@ -1,0 +1,126 @@
+/** @format */
+//average of values
+function calculate(array) {
+    return array.reduce((a, b) => a + b) / array.length;
+}
+
+console.log(calculate([5,5,5,5,5]));
+
+
+const people = [
+	{name:'Sarah', gender:'female', age:25,salary:1000},
+ 	{name:'Tom', gender:'male', age:18,salary:5000},
+ 	{name:'Tim', gender:'male', age:65,salary:1500},
+ 	{name:'Kim', gender:'female', age:58,salary:2000}
+];
+
+// filter out females from the people list
+const females= people.filter(el=>el.gender.match(/female/i));
+console.log('females : ', females)
+
+
+const filteredList = people.filter(el=> el.age > 50);
+
+console.log('people who\'s age is geater then 50 ', filteredList);
+
+
+const average = people.reduce((total, next) => total + next.salary, 0) / people.length;
+
+console.log('People Average Salary : ',average);
+
+/*=============currying===========*/
+console.log(filteredList);
+
+const sum = (a) => {
+	return (b) => b + a;
+};
+
+sum(1)(2);
+
+/*============== call=============*/
+const P = {
+	fistName: 'A',
+	lastName: 'B',
+};
+const person = {
+	fistName: '',
+	lastName: '',
+	fullName: function () {
+		return this.firstName + ' ' + this.lastName;
+	},
+};
+
+const xyz = (arg) => {
+	return person.fullName.call(arg);
+};
+const R = xyz(P);
+console.log(R);
+
+/*---------------------unique---------------------*/
+let arr = [3, 2, 7, 5, 9, 8, 2, 9, 8, 3, 4];
+
+const getUnique = (arg) => {
+	const res = arg.filter((el, i, self) => {
+		return self.indexOf(el) === i;
+	});
+	return res;
+};
+
+getUnique(arr);
+
+/*=========bubbling======*/
+document.getElementById('one').addEventListener('click', show, false);
+
+/*=========capture======*/
+document.getElementById('one').addEventListener('click', show, true);
+
+/*=================prototype======================*/
+
+var Model = function (model_no) {
+	// Instance Member
+	this.model = model_no;
+	this.price = 3000;
+};
+
+var samsung = new Model('samsung');
+var nokia = new Model('nokia');
+//Prototype member
+Model.prototype.color = 'white';
+console.log(samsung);
+console.log(nokia);
+
+/*===================================*/
+function generate(num) {
+	return [...Array(num)].map((_) => this).join('');
+}
+String.prototype.generate = generate;
+
+'hello'.generate(3);
+
+// method ‘generate’ doesn’t exist,
+// please implement it so that code at the bottom works
+const result = 'hello'.generate(3);
+console.log(result); // Should print ‘hellohellohello’ on the single line
+
+/*===================call, apply, bind====================*/
+var name1 = {
+	firstName: 'deepak',
+	lastName: 'bhatt',
+};
+var name2 = {
+	firstName: 'pooja',
+	lastName: 'upadhyay',
+};
+var printFullName = function (location, district) {
+	console.log(this.firstName, this.lastName, location, district);
+};
+//call
+printFullName.call(name1, 'Uttrakhand', 'pithoragarh');
+printFullName.call(name2, 'Uttrakhand', 'pithoragarh');
+
+//apply
+printFullName.apply(name2, ['Uttrakhand', 'pithoragarh']);
+
+//bind
+var printMyName = printFullName.bind(name1, 'Uttrakhand', 'pithoragarh');
+console.log(printMyName);
