@@ -20,10 +20,12 @@ const postQuestion = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!!req?.method?.match(/post/i)) {
     const questions = await fetchQuestions();
     const {
-      values: { que, answer },
+      values: {
+        userId,
+        inputs: { que, answer },
+      },
     } = req?.body;
     if (!que || !answer) {
-      console.log("inside validation ");
       res.status(401).send({ error: "Please enter all fields" });
       return;
     }
@@ -31,17 +33,17 @@ const postQuestion = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const db = client.db();
     try {
-      console.log("inside try before file write question");
       await db.collection("questions").insertOne({
         id: questions?.length + 2,
         que,
+        userId,
       });
       await db.collection("answers").insertOne({
         id: questions?.length + 2,
         answer,
       });
     } catch (err) {
-      console.error("If some error : ", err);
+      // console.error("If some error : ", err);
     }
     res.status(200).send({ message: "Saved successfully !" });
     client.close();
