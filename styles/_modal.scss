@@ -1,0 +1,53 @@
+.modal__dimmer {
+  &.visible {
+    display: flex !important;
+  }
+  .modal {
+    padding: 1rem;
+    border-radius: 2.5rem;
+    &:not(&-default) {
+      backdrop-filter: 50%;
+    }
+    &--invalid-feedback {
+      color: var(--color-red);
+      font-size: var(--default-font-size);
+      text-align: right;
+    }
+    .logout__wrapper {
+      margin: auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    .btn-logout {
+      position: absolute;
+      top: 2rem;
+      right: 7%;
+    }
+    .field.actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-wrap: wrap;
+      grid-gap: 1rem;
+    }
+    .header,
+    .ui.form .field > label {
+      background-image: linear-gradient(
+        to right,
+        var(--color-primary-dark),
+        var(--color-primary-light)
+      );
+      -webkit-background-clip: text;
+      color: transparent;
+      font-size: var(--default-font-size);
+    }
+    .ui.form .field.error > label {
+      color: var(--color-red);
+    }
+    .ui.form .field > input,
+    .ui.form .field > textarea {
+      padding: 1.5rem 2rem;
+      font-size: var(--default-font-size);
+    }
+  }
+}
