@@ -76,7 +76,7 @@ const Questions = ({ session }) => {
         </Link>
 
         <button
-          className="btn btn-border btn-secondary"
+          className="btn btn-border btn-primary"
           onClick={handleAddQuestion}
         >
           Add question
@@ -92,21 +92,24 @@ const Questions = ({ session }) => {
                 className={`title animating ${question === id ? "active" : ""}`}
                 onClick={(e) => handleQuestion(e, id)}
               >
-                <i
-                  className={`angle ${
-                    question === id ? "down " : "right"
-                  } icon`}
-                />
-                {que}
+                <div>
+                  <i
+                    className={`angle ${
+                      question === id ? "down " : "right"
+                    } icon`}
+                  />
+                  {que}
+                </div>
                 {!!session && session?.user?.id === userId ? (
                   <button
-                    className="btn btn-border btn-secondary"
+                    className="btn btn-border btn-remove"
                     onClick={() => handleRemove(id)}
                   >
                     Remove
                   </button>
                 ) : null}
               </div>
+
               <div
                 className={`content animating ${
                   question === id ? "active" : "hidden"
@@ -203,7 +206,10 @@ const Questions = ({ session }) => {
           .title:before {
             content: counter(css-counter) ". ";
           }
-          .btn {
+          .title {
+            display: flex;
+          }
+          .btn-primary {
             background: var(--color-primary-dark);
             color: var(--color-background);
             text-transform: uppercase;
@@ -218,7 +224,7 @@ const Questions = ({ session }) => {
             border: 2px solid var(--color-primary-dark);
             cursor: pointer;
           }
-          .btn:hover {
+          .btn-primary:hover {
             background-image: linear-gradient(
               to right,
               var(--color-primary-light),
