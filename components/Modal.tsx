@@ -12,6 +12,7 @@ const Modal: FC<IProp> = ({
   queryInfo,
   loginButton,
   logoutButton,
+  userId,
 }): JSX.Element => {
   const {
     register,
@@ -44,7 +45,11 @@ const Modal: FC<IProp> = ({
 
   const onSubmit = (e: any) => {
     if (isEmpty(errors)) {
-      postMutation.mutate(inputs);
+      const values = {
+        userId,
+        inputs,
+      };
+      postMutation.mutate(values);
       reset();
       setInputs({
         que: "",
