@@ -1,0 +1,46 @@
+/** @format */
+@import './abstracts/index';
+@import './button';
+@import './_modal.scss';
+@import './notification';
+@import './icon';
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html {
+  // this defines what is the 1rem is
+  font-size: 62.5%; // 1rem = 10px (for our comfort we have decided) / 16px (default browser font size) = 62.5%
+}
+body {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  overflow: hidden;
+  height: calc(100vh);
+}
+a {
+  background-image: linear-gradient(
+    to right,
+    var(--color-primary-dark),
+    var(--color-primary-light)
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+a:hover {
+  color: var(--color-primary-light);
+}
+::selection {
+  background: var(--color-primary-dark);
+  color: var(--color-background);
+}
