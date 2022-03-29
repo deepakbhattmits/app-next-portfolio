@@ -1,0 +1,20 @@
+/** @format */
+
+.social {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 10px 0 0;
+}
+
+.social .ui.horizontal.list > .item > i.icon {
+	width: 35px;
+	height: 35px;
+	padding: 0;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	background: #7726ed;
+	border-radius: 100%;
+	color: #fff;
+}
