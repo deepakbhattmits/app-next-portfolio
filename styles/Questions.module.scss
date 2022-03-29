@@ -1,0 +1,49 @@
+.customAccordion {
+  width: 100%;
+  height: calc(100vh - 135px);
+  overflow: hidden;
+  overflow-y: auto;
+  counter-reset: css-counter 0;
+  border-radius: 0;
+} /* Track */
+.customAccordion::-webkit-scrollbar-track {
+  background: #ccc;
+}
+
+/* Handle */
+.customAccordion::-webkit-scrollbar-thumb {
+  background: var(--color-primary-dark);
+  border-radius: 0;
+}
+
+/* Handle on hover */
+.customAccordion::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.question__container {
+  display: grid;
+  grid-gap: 1rem;
+  padding: 0 1rem;
+}
+.center {
+  margin: auto;
+  text-align: center;
+}
+.padding__top__bottom1 {
+  padding: 1rem 0;
+}
+.link__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header {
+  background-image: linear-gradient(
+    to right,
+    var(--color-primary-light),
+    var(--color-primary-dark)
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
