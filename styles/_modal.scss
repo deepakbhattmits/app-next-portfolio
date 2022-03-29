@@ -22,6 +22,14 @@
       position: absolute;
       top: 2rem;
       right: 7%;
+      @include respond(tab-land) {
+        top: 1rem;
+        right: 4%;
+      }
+      @include respond(tab-port) {
+        top: 1rem;
+        right: 4%;
+      }
     }
     .field.actions {
       display: flex;
