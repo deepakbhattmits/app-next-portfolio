@@ -57,7 +57,7 @@ const postQuestionFile = async (req: NextApiRequest, res: NextApiResponse) => {
       fs.writeFile(questionFilePath, postQuestionJson, { flag: "w" });
     } catch (err) {
       // An error occurred
-      console.error("If some error : ", err);
+      // console.error("If some error : ", err);
     }
 
     // write answer to whole file
@@ -80,7 +80,7 @@ const postQuestionFile = async (req: NextApiRequest, res: NextApiResponse) => {
       fs.writeFile(answerFilePath, postAnswerJson, { flag: "w" });
     } catch (err) {
       // An error occurred
-      console.error("If some error answer ", err);
+      // console.error("If some error answer ", err);
     }
     res.status(200).send({ message: "Saved successfully !" });
   } else {
