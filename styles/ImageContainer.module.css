@@ -1,0 +1,13 @@
+/** @format */
+
+.imgContainer {
+	display: flex;
+	justify-content: center;
+}
+.description .ui.list .header {
+	text-align: center;
+	margin: 15px 0;
+}
+.description .ui.list .item {
+	margin: 15px 0;
+}
