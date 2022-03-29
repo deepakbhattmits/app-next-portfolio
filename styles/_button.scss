@@ -1,13 +1,4 @@
 .btn {
-  background-image: linear-gradient(
-    to right,
-    var(--color-primary-light),
-    var(--color-primary-dark)
-  );
-  -webkit-background-clip: text;
-  color: transparent;
-  text-transform: uppercase;
-  text-decoration: none;
   padding: 0.5rem 4rem;
   @include respond(phone) {
     padding: 0.5rem 1rem;
@@ -35,7 +26,17 @@
     transform: translateY(-1px);
     box-shadow: 0 0.5rem 1rem rgba($color-primary, 0.2);
   }
-
+  &-primary {
+    background-image: linear-gradient(
+      to right,
+      var(--color-primary-light),
+      var(--color-primary-dark)
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
   &--white {
     background-color: var(--color-background);
     color: var(--color-gray-dark);
@@ -53,9 +54,21 @@
       background-color: var(--color-primary);
     }
   }
+  &-remove {
+    margin-left: auto;
+    background: var(--color-red);
+    color: var(--color-background);
+    border: 2px solid transparent;
+    &:hover {
+      border-color: var(--color-red);
+      background: var(--color-background);
+
+      color: var(--color-red);
+    }
+  }
 
   &::after {
-    content: '';
+    content: "";
     display: inline-block;
     height: 100%;
     width: 100%;
