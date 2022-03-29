@@ -18,11 +18,10 @@ export default NextAuth({
       },
     }),
   ],
-  // pages: {
-  //   signIn: '/auth',
-  //   signOut: '/auth',
-  //   error: '/auth', // Error code passed in query string as ?error=
-  // },
+  secret: process.env.SECRET,
+  jwt: {
+    encryption: true,
+  },
   callbacks: {
     jwt: async (token, account) => {
       if (account?.accessToken) {
@@ -30,25 +29,23 @@ export default NextAuth({
       }
       return token;
     },
-    // session: async ({ session, token, user }) => {
-    //   // Send properties to the client, like an access_token from a provider.
-    //   session.accessToken = token.accessToken;
-    //   return session;
-    // },
     redirect: async (url, _baseUrl) => {
       // if (url === "/profile") {
       //   return Promise.resolve("/");
       // }
       return Promise.resolve("/Questions");
     },
-  },
-  secret: process.env.SECRET,
-  jwt: {
-    // secret: process.env.SECRET,
-    encryption: true,
-  },
-  session: {
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60,
+    session: async ({ session, token, user }) => {
+      // Send properties to the client, like an access_token from a provider.
+      session = {
+        user: token?.token["user"],
+      };
+      return session;
+    },
+    // pages: {
+    //   signIn: '/auth',
+    //   signOut: '/auth',
+    //   error: '/auth', // Error code passed in query string as ?error=
+    // },
   },
 });
