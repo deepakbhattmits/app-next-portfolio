@@ -1,0 +1,13 @@
+/** @format */
+
+.skills .ui.selection.list > .item {
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  width: 155px;
+  margin: 0.5em;
+  border-radius: 30px;
+}
+.skills .ui.selection.list {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
