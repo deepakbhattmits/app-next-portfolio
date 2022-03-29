@@ -20,7 +20,7 @@ $color-meta: #00000066;
 $color-secondary-accent: #358ef1;
 
 $color-dark-black: #292c35;
-$color-red: #9f3a38;
+$color-red: #f14233;
 
 //FONT
 $default-font-size: 1.6rem;
@@ -60,7 +60,7 @@ $gutter-horizontal: 6rem;
   --gutter-horizontal: #{$gutter-horizontal};
   --default-font-size: #{$default-font-size};
 }
-[data-theme='dark'] {
+[data-theme="dark"] {
   --color-primary: #{$color-background};
   --color-background: #{$color-primary};
   --color-gray-light-1: #{$color-dark-black};
