@@ -1,0 +1,19 @@
+/** @format */
+
+.main .ui.cards > .card > .extra.action {
+	display: flex;
+	justify-content: space-between;
+}
+.main .ui.cards > .card > .extra.action .ui.button {
+	background: #7726ed;
+	color: #fff;
+	border: 2px solid #7726ed;
+	width: 80px;
+	border-radius: 50px;
+	padding: 0.5em;
+}
+.main .ui.cards > .card > .extra.action .ui.button:hover {
+	background: #fff;
+	color: #7726ed;
+	border: 2px solid #7726ed;
+}
