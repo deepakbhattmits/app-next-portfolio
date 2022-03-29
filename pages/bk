@@ -1,0 +1,47 @@
+
+/** @format */
+import { useState, useEffect } from 'react';
+import Head from 'next/head';
+import Loading from '../public/images/loading.svg';
+import '../styles/globals.css';
+
+const MyApp = ({ Component, pageProps }) => {
+	const [pageLoading, setPageLoading] = useState(false);
+	useEffect(() => {
+		setPageLoading(true);
+		setTimeout(() => {
+			setPageLoading(false);
+		}, 3000); //lag for 3 sec.
+	}, []);
+	return (
+		<>
+			<>
+				<Head>
+					<meta name='viewport' content='viewport-fit=cover' />
+					<title>App Portfolio</title>
+				</Head>
+				{pageLoading ? (
+					<div className='loading-spinner'>
+						<div className='img-div'>
+							Loading...
+							{/* <Loading width={200} height={200} fill={'white'} /> */}
+						</div>
+					</div>
+				) : (
+					<Component {...pageProps} />
+				)}
+			</>
+			<style jsx>{`
+				.loading-spinner {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					height: 100vh;
+					color: #fff;
+				}
+			`}</style>
+		</>
+	);
+};
+
+export default MyApp;
