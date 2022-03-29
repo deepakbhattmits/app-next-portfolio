@@ -1,0 +1,69 @@
+$color-primary: #000;
+$color-background: #fff;
+$color-primary-light: #9572c9;
+$color-primary-dark: #5b34da;
+
+$color-secondary-light: #fbb900;
+$color-secondary-dark: #ff7730;
+
+$color-tertiary-light: #2998ff;
+$color-tertiary-dark: #5643fa;
+
+$color-gray-dark: #777;
+$color-gray-dark-1: #999;
+$color-gray-dark-2: #333;
+$color-gray-light-1: #f7f7f7;
+$color-gray-light-2: #eee;
+
+$color-description: #000000ad;
+$color-meta: #00000066;
+$color-secondary-accent: #358ef1;
+
+$color-dark-black: #292c35;
+$color-red: #9f3a38;
+
+//FONT
+$default-font-size: 1.6rem;
+
+// GRID
+
+$max-width: 114rem;
+$max-width-small: 50rem;
+$gutter-vertical: 8rem;
+$gutter-vertical-small: 6rem;
+$gutter-horizontal: 6rem;
+//custom property
+:root {
+  --color-primary: #{$color-primary};
+  --color-background: #{$color-background};
+  --color-primary-dark: #{$color-primary-dark};
+  --color-primary-light: #{$color-primary-light};
+  --color-secondary-dark: #{$color-secondary-dark};
+  --color-secondary-light: #{$color-secondary-light};
+  --color-tertiary-dark: #{$color-tertiary-dark};
+  --color-tertiary-light: #{$color-tertiary-light};
+  --color-gray-dark: #{$color-gray-dark};
+  --color-gray-dark-1: #{$color-gray-dark-1};
+  --color-gray-dark-2: #{$color-gray-dark-2};
+  --color-gray-light-1: #{$color-gray-light-1};
+  --color-gray-light-2: #{$color-gray-light-2};
+  --color-red: #{$color-red};
+
+  --color-description: #{$color-description};
+  --color-meta: #{$color-meta};
+  --color--secondary-accent: #{$color-secondary-accent};
+  --max-width: #{$max-width};
+
+  --max-width-small: #{$max-width-small};
+  --gutter-vertical: #{$gutter-vertical};
+  --gutter-vertical-small: #{$gutter-vertical-small};
+  --gutter-horizontal: #{$gutter-horizontal};
+  --default-font-size: #{$default-font-size};
+}
+[data-theme='dark'] {
+  --color-primary: #{$color-background};
+  --color-background: #{$color-primary};
+  --color-gray-light-1: #{$color-dark-black};
+  --color-description: #{$color-background};
+  --color-meta: #{$color-background};
+}
