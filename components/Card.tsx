@@ -1,7 +1,7 @@
 /** @format */
-import { FC } from 'react'
-import Link from 'next/link'
-import { IProp } from '../interfaces'
+import { FC } from "react";
+import Link from "next/link";
+import { IProp } from "../interfaces";
 
 const Card: FC<IProp> = ({ repos }): JSX.Element => {
   return (
@@ -17,14 +17,14 @@ const Card: FC<IProp> = ({ repos }): JSX.Element => {
                 <strong className="header">Stacks : </strong>
                 {stacks
                   .map(
-                    (e) => e.split('')[0].toUpperCase() + e.slice(1, e.length),
+                    (e) => e.split("")[0].toUpperCase() + e.slice(1, e.length)
                   )
-                  .join(', ')}
+                  .join(", ")}
               </div>
               <div className="description">{description}</div>
             </div>
             <div className="action extra">
-              <Link href={!!repoUrl ? repoUrl : '/_error'}>
+              <Link href={!!repoUrl ? repoUrl : "/_error"}>
                 <a
                   target="_blank"
                   rel="noopener noreferer"
@@ -34,13 +34,13 @@ const Card: FC<IProp> = ({ repos }): JSX.Element => {
                 </a>
               </Link>
 
-              <Link href={!!webUrl ? webUrl : '/_error'}>
+              <Link href={!!webUrl ? webUrl : "/_error"}>
                 <a
                   target="_blank"
                   rel="noopener noreferer"
                   className="ui button"
                 >
-                  {!!webUrl ? 'Demo' : 'Not Deployed'}
+                  {!!webUrl ? "Demo" : "Not Deployed"}
                 </a>
               </Link>
             </div>
@@ -107,6 +107,6 @@ const Card: FC<IProp> = ({ repos }): JSX.Element => {
         }
       `}</style>
     </>
-  )
-}
-export default Card
+  );
+};
+export default Card;
