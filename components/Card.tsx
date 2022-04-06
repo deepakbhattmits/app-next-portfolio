@@ -79,6 +79,7 @@ const Card: FC<IProp> = ({ repos }): JSX.Element => {
           border-radius: 50px;
           padding: 0.5rem 2rem;
           font-size: var(--default-font-size);
+          transition: 0.4s all;
         }
         .ui.cards > .card > .extra.action .ui.button:hover {
           background: transparent;
