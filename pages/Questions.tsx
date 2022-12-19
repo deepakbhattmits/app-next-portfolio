@@ -34,7 +34,12 @@ const Questions = ({ session }) => {
     setQuestion((prevState) => (prevState === 0 ? id : 0));
   };
   const handleRemove = (id: string) => {
-    deleteMutation.mutate(id);
+    const decision = window.confirm(
+      "Do you really want to Delete selected question ?"
+    );
+    if (decision) {
+      deleteMutation.mutate(id);
+    }
   };
   useEffect(() => {
     if (
