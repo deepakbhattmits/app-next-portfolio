@@ -20,6 +20,8 @@ const Questions = ({ session }) => {
   const [deleteQuestion, setDeleteQuestion] = useState<string>("");
   const [wantDelete, setWantDelete] = useState<boolean>(false);
 
+  const [wantDeleteQuestionId, setWantDeleteQuestionId] = useState<string>("");
+
   const { answerInfo } = useAnswer(question);
   const { queryInfo } = useQuestions();
   const deleteMutation = useDelete();
@@ -36,9 +38,11 @@ const Questions = ({ session }) => {
   };
   const handleRemove = (id: string) => {
     setWantDelete(true);
-    if (wantDelete) {
-      deleteMutation.mutate(id);
-    }
+    setWantDeleteQuestionId(id);
+  };
+  const handleRemoveQuestion = () => {
+    setWantDelete(false);
+    deleteMutation.mutate(wantDeleteQuestionId);
   };
   useEffect(() => {
     if (
@@ -179,7 +183,7 @@ const Questions = ({ session }) => {
             <div className="confirm__wrapper--actions">
               <span
                 className="btn btn-border btn-primary"
-                onClick={() => setWantDelete(true)}
+                onClick={handleRemoveQuestion}
               >
                 OK
               </span>
