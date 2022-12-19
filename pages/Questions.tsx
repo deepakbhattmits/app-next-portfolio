@@ -35,7 +35,7 @@ const Questions = ({ session }) => {
   };
   const handleRemove = (id: string) => {
     const decision = window.confirm(
-      "Do you really want to Delete selected question ?"
+      "Do you really want to delete selected question ?"
     );
     if (decision) {
       deleteMutation.mutate(id);
