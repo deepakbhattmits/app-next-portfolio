@@ -18,6 +18,7 @@ const Questions = ({ session }) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [question, setQuestion] = useState<number>(0);
   const [deleteQuestion, setDeleteQuestion] = useState<string>("");
+  const [wantDelete, setWantDelete] = useState<boolean>(false);
 
   const { answerInfo } = useAnswer(question);
   const { queryInfo } = useQuestions();
@@ -34,10 +35,8 @@ const Questions = ({ session }) => {
     setQuestion((prevState) => (prevState === 0 ? id : 0));
   };
   const handleRemove = (id: string) => {
-    const decision = window.confirm(
-      "Do you really want to delete selected question ?"
-    );
-    if (decision) {
+    setWantDelete(true);
+    if (wantDelete) {
       deleteMutation.mutate(id);
     }
   };
@@ -171,6 +170,29 @@ const Questions = ({ session }) => {
           ) : null
         }
       />
+      {wantDelete ? (
+        <div className="confirm__wrapper">
+          <div className="confirm__wrapper--content">
+            <h1 className="confirm__wrapper--header">
+              Are you sure want to delete selected question ?
+            </h1>
+            <div className="confirm__wrapper--actions">
+              <span
+                className="btn btn-border btn-primary"
+                onClick={() => setWantDelete(true)}
+              >
+                OK
+              </span>
+              <span
+                className="btn btn-border btn-primary"
+                onClick={() => setWantDelete(false)}
+              >
+                Cancel
+              </span>
+            </div>
+          </div>
+        </div>
+      ) : null}
       {postMutation?.isLoading || deleteMutation?.isLoading ? (
         <LoadingNotification />
       ) : postMutation?.isError || deleteMutation?.isError ? (
