@@ -33,15 +33,14 @@ const postQuestion = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const db = client.db();
     let lastElement: any = questions.slice(-1);
-    console.log("lastElement : ", lastElement);
     try {
       await db.collection("questions").insertOne({
-        id: +lastElement?.id + 1,
+        id: +lastElement[0]?.id + 1,
         que,
         userId,
       });
       await db.collection("answers").insertOne({
-        id: +lastElement?.id + 1,
+        id: +lastElement[0]?.id + 1,
         answer,
       });
     } catch (err) {
