@@ -4,7 +4,8 @@ export const repos = [
   {
     appName: "Favourite Bar ",
     repoUrl: "https:github.com/deepakbhattmits/app-proj-bar-react-javascript",
-    webUrl: "https:app-proj-bar.herokuapp.com/",
+    // webUrl: "https:app-proj-bar.herokuapp.com/",
+    webUrl: "https://app-proj-bar.netlify.app/#/home",
     description:
       "This is a app where user can add and remove beers favorite just like adding and remving from wishlist",
     stacks: [
