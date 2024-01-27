@@ -79,7 +79,7 @@ const Questions = ({ session }) => {
         <h3 className={styles?.header}>JS Questions</h3>
       </div>
       <div className={styles.link__wrapper}>
-        <Link href="/">
+        <Link legacyBehavior href="/">
           <a className="">Back to home page</a>
         </Link>
 
