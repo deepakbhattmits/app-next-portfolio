@@ -66,6 +66,13 @@ const Modal: FC<IProp> = ({
     };
   }, [handlekeyDown]);
   useEffect(() => {
+    if (inputs.que.match(/^\s+$/) !== null) {
+      setInputs({ ...inputs, que: "" });
+    } else if (inputs.answer.match(/^\s+$/) !== null) {
+      setInputs({ ...inputs, answer: "" });
+    }
+  }, [inputs]);
+  useEffect(() => {
     const i_id = setInterval(() => {
       if (
         postMutation.isSuccess &&
@@ -144,7 +151,6 @@ const Modal: FC<IProp> = ({
                       required: true,
                       onChange: handleChange,
                     })}
-                    onChange={handleChange}
                     value={inputs?.answer}
                   ></textarea>
                   <div className="modal--invalid-feedback">
