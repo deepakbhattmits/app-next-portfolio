@@ -1,11 +1,11 @@
-/** @format */ import { FC } from 'react'
-import Link from 'next/link'
-import { IProp } from '../interfaces'
+/** @format */ import { FC } from "react";
+import Link from "next/link";
+import { IProp } from "../interfaces";
 const Socials: FC<IProp> = ({ socials }): JSX.Element => {
   return (
     <div className="social">
       {socials?.map(({ name, icon, href }, index) => (
-        <Link href={href} key={index}>
+        <Link legacyBehavior href={href} key={index}>
           <a
             target="_blank"
             title={name}
@@ -39,6 +39,6 @@ const Socials: FC<IProp> = ({ socials }): JSX.Element => {
         }
       `}</style>
     </div>
-  )
-}
-export default Socials
+  );
+};
+export default Socials;
