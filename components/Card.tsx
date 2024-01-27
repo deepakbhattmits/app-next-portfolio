@@ -24,7 +24,7 @@ const Card: FC<IProp> = ({ repos }): JSX.Element => {
               <div className="description">{description}</div>
             </div>
             <div className="action extra">
-              <Link href={!!repoUrl ? repoUrl : "/_error"}>
+              <Link legacyBehavior href={!!repoUrl ? repoUrl : "/_error"}>
                 <a
                   target="_blank"
                   rel="noopener noreferer"
@@ -34,7 +34,7 @@ const Card: FC<IProp> = ({ repos }): JSX.Element => {
                 </a>
               </Link>
 
-              <Link href={!!webUrl ? webUrl : "/_error"}>
+              <Link legacyBehavior href={!!webUrl ? webUrl : "/_error"}>
                 <a
                   target="_blank"
                   rel="noopener noreferer"
