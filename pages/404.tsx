@@ -4,8 +4,8 @@ const Custom404 = () => {
   return (
     <div className="main-error-section">
       <h1>404 - Page Not Found</h1>
-      <Link href="/">
-        <a>Go Back to Home Page</a>
+      <Link legacyBehavior href="/">
+        <a id="link">Go Back to Home Page</a>
       </Link>
       <style jsx>{`
         .main-error-section {
