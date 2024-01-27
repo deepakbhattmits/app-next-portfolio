@@ -25,7 +25,7 @@ const postQuestion = async (req: NextApiRequest, res: NextApiResponse) => {
         inputs: { que, answer },
       },
     } = req?.body;
-    if (!que || !answer) {
+    if (que?.trim()?.length === 0 || answer?.trim()?.length === 0) {
       res.status(401).send({ error: "Please enter all fields" });
       return;
     }
