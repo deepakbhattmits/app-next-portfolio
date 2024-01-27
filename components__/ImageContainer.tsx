@@ -1,8 +1,8 @@
 /** @format */
-import { FC } from 'react'
-import Link from 'next/link'
+import { FC } from "react";
+import Link from "next/link";
 
-import { IProp } from '../interfaces'
+import { IProp } from "../interfaces";
 // import styles from '../styles/ImageContainer.module.css';
 const ImageContainer: FC<IProp> = ({
   user: { avatar_url, name, location },
@@ -31,7 +31,7 @@ const ImageContainer: FC<IProp> = ({
           <div className="item">
             <i className="map marker alternate icon"></i>
             <div className="content">
-              {!!location ? location : 'Bangalore'}, India
+              {!!location ? location : "Bangalore"}, India
             </div>
           </div>
           <div className="item">
@@ -45,7 +45,7 @@ const ImageContainer: FC<IProp> = ({
           <div className="item">
             <i className="question circle outline icon"></i>
             <div className="content">
-              <Link href="/Questions">
+              <Link legacyBehavior href="/Questions">
                 <a className="">Question</a>
               </Link>
             </div>
@@ -57,12 +57,12 @@ const ImageContainer: FC<IProp> = ({
           display: flex;
           justify-content: center;
         }
-        .img-container img.ui.circular.image:not([src='']) {
+        .img-container img.ui.circular.image:not([src=""]) {
           background: #0003;
           color: transparent;
         }
-        .img-container img.ui.circular.image:not([src='']):before {
-          content: 'No Profile';
+        .img-container img.ui.circular.image:not([src=""]):before {
+          content: "No Profile";
           color: #000;
           position: absolute;
           top: 35px;
@@ -80,6 +80,6 @@ const ImageContainer: FC<IProp> = ({
         }
       `}</style>
     </>
-  )
-}
-export default ImageContainer
+  );
+};
+export default ImageContainer;
