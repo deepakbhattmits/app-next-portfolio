@@ -53,7 +53,7 @@ const ImageContainer: FC<IProp> = ({
           <div className="item">
             <i className="question circle outline icon"></i>
             <div className="content">
-              <Link href="/Questions">
+              <Link legacyBehavior href="/Questions">
                 <a className="">Question</a>
               </Link>
             </div>
