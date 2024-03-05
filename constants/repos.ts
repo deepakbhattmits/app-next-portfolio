@@ -24,7 +24,7 @@ export const repos = [
   {
     appName: "Ecommerce App",
     repoUrl: "https:github.com/deepakbhattmits/ecom-turing",
-    webUrl: "https:ecom-turing.herokuapp.com/",
+    webUrl: "https://ecom-turing.vercel.app/",
     description:
       "This demo app ecommerce app consuming api to render categories, products and color swatches",
     stacks: [
