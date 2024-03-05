@@ -64,7 +64,7 @@ export const repos = [
   {
     appName: "App Quiz",
     repoUrl: "https:github.com/deepakbhattmits/app-quiz",
-    webUrl: "https:app-quiz-react.herokuapp.com",
+    webUrl: "https://app-quiz-bice.vercel.app/",
     description:
       "This is a demo app to demonstrate QUIZ app developed in react and used redux, redux-thunk for state management ",
     stacks: [
@@ -86,22 +86,22 @@ export const repos = [
       "it's a clone of Hacker news website https:news.ycombinator.com some functionality is in progress",
     stacks: ["next js", "react", "react-dom", "isomorphic-unfetch"],
   },
-  {
-    appName: "node js shop",
-    repoUrl: "https:github.com/deepakbhattmits/app-node",
-    webUrl: "https:app-node-home.herokuapp.com/",
-    description:
-      "a shop build in node js and use view engine EJS using database mongoDB",
-    stacks: [
-      "react js",
-      "redux",
-      "semantic UI",
-      "mongoDB",
-      "view engine(EJS)",
-      "nodejs",
-      "express",
-    ],
-  },
+  // {
+  //   appName: "node js shop",
+  //   repoUrl: "https:github.com/deepakbhattmits/app-node",
+  //   webUrl: "https:app-node-home.herokuapp.com/",
+  //   description:
+  //     "a shop build in node js and use view engine EJS using database mongoDB",
+  //   stacks: [
+  //     "react js",
+  //     "redux",
+  //     "semantic UI",
+  //     "mongoDB",
+  //     "view engine(EJS)",
+  //     "nodejs",
+  //     "express",
+  //   ],
+  // },
   // {
   // 	appName: 'Angular app',
   // 	repoUrl: 'https:github.com/deepakbhattmits/angularnew',
