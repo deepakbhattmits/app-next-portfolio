@@ -20,7 +20,7 @@ const nextConfig = {
     return [
       {
         // matching all API routes
-        source: "/api/v1/:path*",
+        source: "/api/:path*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           {

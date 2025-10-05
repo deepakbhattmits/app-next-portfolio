@@ -12,8 +12,8 @@ const cors = initMiddleware(
 );
 
 const getAnswer = async (req: NextApiRequest, res: NextApiResponse) => {
-   await cors(req, res); // 👈 Important: run the CORS middleware first
-   // const { questionId } = req?.query;
+  await cors(req, res); // 👈 Important: run the CORS middleware first
+  const { questionId } = req?.query;
   const client = await connectToDatabase();
   const db = client?.db();
   const answer = await db?.collection("answers").findOne({ id: +questionId });
