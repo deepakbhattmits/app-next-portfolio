@@ -1,6 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../../helpers";
+import Cors from 'cors';
+import initMiddleware from '../../../lib/init-middleware'; // adjust path accordingly
+const cors = initMiddleware(
+  Cors({
+    methods: ['DELETE'],
+    origin: 'https://app-next-portfolio.vercel.app', // ← set your frontend URL here
+    credentials: true,
+  })
+);
 const deleteQuestion = async (req: NextApiRequest, res: NextApiResponse) => {
+  await cors(req, res)
   if (!!req?.method?.match(/delete/i)) {
     const { id } = req?.body;
     if (!id) {

@@ -1,24 +1,18 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../../helpers";
-
-export const fetchQuestions = async () => {
-  const client = await connectToDatabase();
-  const db = client?.db();
-  const questions = await db?.collection("questions").find().toArray();
-  client.close();
-  return questions;
-};
-export const fetchAnswers = async () => {
-  const client = await connectToDatabase();
-
-  const db = client?.db();
-  const answers = await db?.collection("answers").find().toArray();
-  client.close();
-  return answers;
-};
+import Cors from 'cors';
+import initMiddleware from '../../../lib/init-middleware'; // adjust path accordingly
+const cors = initMiddleware(
+  Cors({
+    methods: ['POST'],
+    origin: 'https://app-next-portfolio.vercel.app', // ← set your frontend URL here
+    credentials: true,
+  })
+);
 const postQuestion = async (req: NextApiRequest, res: NextApiResponse) => {
+  await cors(req, res)
   if (!!req?.method?.match(/post/i)) {
-    const questions = await fetchQuestions();
+    const timeStamp = Date.now()
     const {
       values: {
         userId,
@@ -32,15 +26,14 @@ const postQuestion = async (req: NextApiRequest, res: NextApiResponse) => {
     const client = await connectToDatabase();
 
     const db = client.db();
-    let lastElement: any = questions.slice(-1);
     try {
       await db.collection("questions").insertOne({
-        id: +lastElement[0]?.id + 1,
+        id: timeStamp,
         que,
         userId,
       });
       await db.collection("answers").insertOne({
-        id: +lastElement[0]?.id + 1,
+        id: timeStamp,
         answer,
       });
     } catch (err) {
