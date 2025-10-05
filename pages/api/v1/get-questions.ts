@@ -1,17 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../../helpers";
 // import { fetchQuestions } from "./post-question";
-import Cors from 'cors';
-import initMiddleware from '../../../lib/init-middleware'; // adjust path accordingly
-const cors = initMiddleware(
-  Cors({
-    methods: ['DELETE'],
-    origin: 'https://app-next-portfolio.vercel.app', // ← set your frontend URL here
-    credentials: true,
-  })
-);
+
 const getQuestions = async (req: NextApiRequest, res: NextApiResponse) => {
-  await cors(req, res)
+
   // const questions = await fetchQuestions();
   const client = await connectToDatabase();
 
