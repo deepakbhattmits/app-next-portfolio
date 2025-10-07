@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../../helpers";
+import { randomUUID } from 'crypto';
 
 const postQuestion = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (!!req?.method?.match(/post/i)) {
-    const timeStamp = Date.now()
+    const uuid = randomUUID()
     const {
       values: {
         userId,
@@ -20,12 +21,12 @@ const postQuestion = async (req: NextApiRequest, res: NextApiResponse) => {
     const db = client.db();
     try {
       await db.collection("questions").insertOne({
-        id: timeStamp,
+        id: uuid,
         que,
         userId,
       });
       await db.collection("answers").insertOne({
-        id: timeStamp,
+        id: uuid,
         answer,
       });
     } catch (err) {
