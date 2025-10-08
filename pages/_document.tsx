@@ -28,9 +28,16 @@ class MyDocument extends Document {
           <NextScript />
           <script
             dangerouslySetInnerHTML={{
-              __html: blockingSetInitialColorMode,
+              __html: `
+                void function() {
+                  try {
+                    ${setInitialColorMode.toString()}
+	                  setInitialColorMode();
+                  } catch (e) {}
+                }();
+              `,
             }}
-          ></script>
+          />
         </body>
         {/* <style jsx>{`
 					.ui * {
@@ -46,12 +53,6 @@ class MyDocument extends Document {
   }
 }
 
-// our function needs to be a string
-const blockingSetInitialColorMode = `(function() {
-	${setInitialColorMode.toString()}
-	setInitialColorMode();
-})()
-`;
 
 function setInitialColorMode() {
   function getInitialColorMode() {

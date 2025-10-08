@@ -217,6 +217,9 @@ const Questions = ({ session }) => {
             border-radius: 0;
             width: 100%;
           }
+          .ui.styled.accordion{
+            background:var(--color-background)
+          }
           .ui.styled .title,
           .ui.styled .content {
             transition: all 0.2s;
