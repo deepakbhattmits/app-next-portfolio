@@ -25,7 +25,7 @@ const nextConfig = {
           { key: "Access-Control-Allow-Credentials", value: "true" },
           {
             key: "Access-Control-Allow-Origin",
-            value: "https://app-next-portfolio.vercel.app",
+            value: "https://app-next-portfolio-deepakbhattmits.vercel.app",
           },
           {
             key: "Access-Control-Allow-Methods",
