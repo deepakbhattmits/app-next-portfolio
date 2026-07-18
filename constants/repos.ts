@@ -4,10 +4,9 @@ export const repos = [
   {
     appName: "Favourite Products App",
     repoUrl: "https:github.com/deepakbhattmits/app-proj-bar-react-javascript",
-    // webUrl: "https:app-proj-bar.herokuapp.com/",
     webUrl: "https://app-proj-product.netlify.app/#/home",
     description:
-      "This is a app where user can add and remove beers favorite just like adding and remving from wishlist",
+      "This is a app where user can add and remove favourite products, just like adding and remving from wishlist",
     stacks: [
       "react js",
       "redux",
@@ -45,6 +44,23 @@ export const repos = [
     ],
   },
   {
+    appName: "App Quiz",
+    repoUrl: "https:github.com/deepakbhattmits/app-quiz",
+    webUrl: "https://app-quiz-bice.vercel.app/",
+    description:
+      "This is a demo app to demonstrate QUIZ app developed in react and used redux, redux-thunk for state management ",
+    stacks: [
+      "react js",
+      "react-dom",
+      "redux",
+      "redux-thunk",
+      "react-bootstrap",
+      "node-sass",
+      "bootstarp",
+      "google fonts",
+    ],
+  },
+  {
     appName: "Next cookie authentication",
     repoUrl: "https:github.com/deepakbhattmits/next-cookie-auth",
     webUrl: "https:next-cookie-auth.deepakbhattmits.vercel.app",
@@ -68,29 +84,19 @@ export const repos = [
     stacks: ["react js", "redux", "mongodb", "node js", "mongoose", "mapboxgl"],
   },
   {
-    appName: "App Quiz",
-    repoUrl: "https:github.com/deepakbhattmits/app-quiz",
-    webUrl: "https://app-quiz-bice.vercel.app/",
-    description:
-      "This is a demo app to demonstrate QUIZ app developed in react and used redux, redux-thunk for state management ",
-    stacks: [
-      "react js",
-      "react-dom",
-      "redux",
-      "redux-thunk",
-      "react-bootstrap",
-      "node-sass",
-      "bootstarp",
-      "google fonts",
-    ],
-  },
-  {
     appName: "Hacker Next",
     repoUrl: "https:github.com/deepakbhattmits/hacker-next",
     webUrl: " https:hacker-next.deepakbhattmits.vercel.app",
     description:
       "it's a clone of Hacker news website https:news.ycombinator.com some functionality is in progress",
     stacks: ["next js", "react", "react-dom", "isomorphic-unfetch"],
+  },
+  {
+    appName: "App Recipes",
+    repoUrl: "https://github.com/deepakbhattmits/app-recipes",
+    webUrl: "app-recipes-psi.vercel.app",
+    description: "A simple app to manage and share recipes",
+    stacks: ["next js", "react", "@tanstack/react-query", "lucide-react", "tailwindcss", "axios"],
   },
   // {
   //   appName: "node js shop",
