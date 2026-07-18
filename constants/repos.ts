@@ -2,7 +2,7 @@
 
 export const repos = [
   {
-    appName: "Favourite Bar ",
+    appName: "Favourite Products App",
     repoUrl: "https:github.com/deepakbhattmits/app-proj-bar-react-javascript",
     // webUrl: "https:app-proj-bar.herokuapp.com/",
     webUrl: "https://app-proj-product.netlify.app/#/home",
