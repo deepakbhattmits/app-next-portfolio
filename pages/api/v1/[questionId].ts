@@ -6,7 +6,7 @@ const getAnswer = async (req: NextApiRequest, res: NextApiResponse) => {
   const client = await connectToDatabase();
   const db = client?.db();
   const answer = await db?.collection("answers").findOne({
-    id: questionId, $or: [
+    id: +questionId, $or: [
       { id: { $type: "number" } },
       { id: { $type: "string", $regex: /^(?=.*[A-Za-z])(?=.*[0-9])/ } }
     ]
