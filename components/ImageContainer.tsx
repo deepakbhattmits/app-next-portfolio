@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { IProp } from '../interfaces'
+import { Mail, MapPin, Phone, Rocket } from 'lucide-react'
 // import styles from '../styles/ImageContainer.module.css';
 const ImageContainer: FC<IProp> = ({
   user: { avatar_url, name, location },
@@ -28,30 +29,30 @@ const ImageContainer: FC<IProp> = ({
         /> */}
       </div>
       <div className="description">
-        <div className="ui list">
-          <div className="item">
-            <div className="header">{name}</div>
+        <div className="">
+          <div className="item p-2 text-center">
+            <div className="text-2xl">{name}</div>
           </div>
-          <div className="item">
-            <i className="mobile alternate icon"></i>
+          <div className="item flex p-2 gap-2 items-center">
+            <Phone />
             <div className="content">+91 - 8660272372</div>
           </div>
-          <div className="item">
-            <i className="map marker alternate icon"></i>
+          <div className="item flex p-2 gap-2 items-center">
+            <MapPin />
             <div className="content">
               {!!location ? location : 'Bangalore'}, India
             </div>
           </div>
-          <div className="item">
-            <i className="envelope outline icon"></i>
+          <div className="item flex p-2 gap-2 items-center">
+            <Mail />
             <div className="content">
               <a href="mailto:deepakbhattmits@gmail.com">
                 deepakbhattmits@gmail.com
               </a>
             </div>
           </div>
-          <div className="item">
-            <i className="question circle outline icon"></i>
+          <div className="item flex p-2 gap-2 items-center">
+            <Rocket />
             <div className="content">
               <Link legacyBehavior href="/Questions">
                 <a className="">Question</a>

@@ -3,64 +3,68 @@
 import { FC, useEffect, useState } from 'react'
 
 import { IProp } from '../interfaces'
+import { Moon, Sun } from 'lucide-react'
 const DarkModeToggle: FC<IProp> = (): JSX.Element => {
-  const [darkTheme, setDarkTheme] = useState(undefined)
+	const [darkTheme, setDarkTheme] = useState(undefined)
 
-  const handleToggle = (event) => {
-    setDarkTheme(event.target.checked)
-  }
+	const handleToggle = (event) => {
+		setDarkTheme(event.target.checked)
+	}
 
-  useEffect(() => {
-    const root = window.document.documentElement
-    const initialColorValue = root.style.getPropertyValue(
-      '--initial-color-mode',
-    )
-    // console.log('init', initialColorValue);
+	useEffect(() => {
+		const root = window.document.documentElement
+		const initialColorValue = root.style.getPropertyValue(
+			'--initial-color-mode',
+		)
+		// console.log('init', initialColorValue);
 
-    setDarkTheme(initialColorValue === 'dark')
-  }, [])
-  useEffect(() => {
-    if (darkTheme !== undefined) {
-      if (darkTheme) {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        window.localStorage.setItem('theme', 'dark')
-      } else {
-        document.documentElement.removeAttribute('data-theme')
-        window.localStorage.setItem('theme', 'light')
-      }
-    }
-  }, [darkTheme])
+		setDarkTheme(initialColorValue === 'dark')
+	}, [])
+	useEffect(() => {
+		if (darkTheme !== undefined) {
+			if (darkTheme) {
+				document.documentElement.setAttribute('data-theme', 'dark')
+				window.localStorage.setItem('theme', 'dark')
+			} else {
+				document.documentElement.removeAttribute('data-theme')
+				window.localStorage.setItem('theme', 'light')
+			}
+		}
+	}, [darkTheme])
 
-  return (
-    <>
-      {darkTheme !== undefined && (
-        <label className="switch">
-          <input type="checkbox" checked={darkTheme} onChange={handleToggle} />
-          <span className={`slider round ${darkTheme ? 'night' : 'day'}`}>
-            {/* {darkTheme?<p>DAYMODE <i className='ui icon orange sun large outline' /></p>:<p><i className='ui icon moon large outline' />NIGHTMODE</p>} */}
-            {darkTheme ? (
-              <>
-                <i className="ui icon sun outline" />
-                <p>DAYMODE</p>
-              </>
-            ) : (
-              <>
-                <i className="ui icon moon outline" />
-                <p>NIGHTMODE</p>
-              </>
-            )}
-          </span>
-        </label>
-      )}
-      <style jsx>{`
+	return (
+		<>
+			{darkTheme !== undefined && (
+				<label className="fixed top-0 right-4 p-2 bg-blue-900 text-white z-10 rounded-full cursor-pointer" title={`Switch to ${darkTheme ? 'light' : 'dark'} mode`}>
+					<input className='hidden' type="checkbox" checked={darkTheme} onChange={handleToggle} />
+					<span className={`round ${darkTheme ? 'night' : 'day'}`}>
+						{/* {darkTheme?<p>DAYMODE <i className='ui icon orange sun large outline' /></p>:<p><i className='ui icon moon large outline' />NIGHTMODE</p>} */}
+						{darkTheme ? (
+							<>
+								{/* <i className="ui icon sun outline" /> */}
+								<Sun className='w-10 h-10' />
+								{/* <p>DAYMODE</p> */}
+							</>
+						) : (
+							<>
+								{/* <i className="ui icon moon outline" /> */}
+								<Moon className='w-10 h-10' />
+								{/* <p>NIGHTMODE</p> */}
+							</>
+						)}
+					</span>
+				</label>
+			)}
+			<style jsx>{`
 				.switch {
-					right: 1.6em;
-					width: 90px;
-					height: 35px;
-					margin: 0.5em 0;
-					position: fixed;
-					top: 0.2em;
-					z-index:1;
+					// right: 1.6em;
+					// width: 90px;
+					// height: 35px;
+					// margin: 0.5em 0;
+					// position: fixed;
+					// top: 0.2em;
+					// z-index:1;
+					// background: var(--color-primary);
 				}
 				.switch input {
 					opacity: 0;
@@ -128,7 +132,7 @@ const DarkModeToggle: FC<IProp> = (): JSX.Element => {
 					font-weight: bolder;
 					font-size: 8px;
 					text-indent: 14px;
-					color: #000;
+					// color: #000;
 				}
 				.day i {
 					position: absolute;
@@ -141,7 +145,7 @@ const DarkModeToggle: FC<IProp> = (): JSX.Element => {
 					text-indent: 32px;
 				
 			`}</style>
-    </>
-  )
+		</>
+	)
 }
 export default DarkModeToggle
