@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { api } from "../utils";
-const useAnswer = (questionId: number) => {
+const useAnswer = (questionId: string | number) => {
   const fetchAnswer = async ({ queryKey }) => {
     const { data } = await api.get(`/api/v1/${queryKey[1]}`);
 

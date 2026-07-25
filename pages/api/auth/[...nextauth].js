@@ -23,9 +23,12 @@ export default NextAuth({
     encryption: true,
   },
   callbacks: {
-    jwt: async (token, account) => {
-      if (account?.accessToken) {
-        token.accessToken = account?.accessToken;
+    jwt: async ({ token, account, user }) => {
+      if (account?.access_token) {
+        token.accessToken = account.access_token;
+      }
+      if (user) {
+        token.user = user;
       }
       return token;
     },
@@ -35,11 +38,9 @@ export default NextAuth({
       // }
       return Promise.resolve("/Questions");
     },
-    session: async ({ session, token, user }) => {
-      // Send properties to the client, like an access_token from a provider.
-      session = {
-        user: token?.token["user"],
-      };
+    session: async ({ session, token }) => {
+      session.user = token.user || session.user;
+      session.accessToken = token.accessToken;
       return session;
     },
     // pages: {

@@ -11,6 +11,64 @@ import { GetServerSideProps } from "next";
 import ErrorNotification from "../components/reusable/ErrorNotification";
 import LoadingNotification from "../components/reusable/LoadingNotification";
 import SuccessNotification from "../components/reusable/SuccessNotification";
+import { LogOut, Minus, Plus } from "lucide-react";
+
+
+
+// Individual Accordion Item Component
+const AccordionItem = ({ title, answer, isOpen, onClick, handleRemove, session, userId, question, id }) => {
+  return (
+    <div className="flex items-center justify-between border-b border-slate-200 p-5" onClick={onClick}>
+      <div>
+        {/* Trigger Button */}
+        <button
+          // onClick={onClick}
+          className="flex items-center justify-between py-4 text-left font-medium text-slate-800 transition-colors hover:text-indigo-600 focus:outline-none"
+          aria-expanded={isOpen}
+        >
+          {/* {question === id ? <Minus className="mr-2" /> : <Plus className="mr-2" />} */}
+          {/* Animated Icon Container */}
+          {/* Icon Wrapper Stack */}
+          <span className="relative h-10 w-10 flex items-center justify-center">
+            {/* Plus Icon */}
+            <Plus
+              className={`absolute h-10 w-10 hover:text-indigo-600 transition-all duration-300 ease-in-out ${isOpen ? 'rotate-90 opacity-0 scale-75' : 'rotate-0 opacity-100 scale-100'
+                }`}
+            />
+
+            {/* Minus Icon */}
+            <Minus
+              className={`absolute h-10 w-10 hover:text-indigo-600 transition-all duration-300 ease-in-out ${isOpen ? 'rotate-0 opacity-100 scale-100' : '-rotate-90 opacity-0 scale-75'
+                }}`}
+            />
+          </span>
+          <span className="text-3xl first-letter:uppercase">{title}</span>
+
+        </button>
+        {/* Animated Content Wrapper using CSS Grid Trick */}
+        <div
+          className={`grid transition-all duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+            }`}
+        >
+          <div className="overflow-hidden">
+            <span className="pb-4 pr-6 text-2xl leading-relaxed text-slate-600">
+              {answer}
+            </span>
+          </div>
+        </div>
+      </div>
+      {!!session && session?.user?.id === userId ? (
+        <div><button
+          className="btn btn-border btn-remove"
+          onClick={(e) => handleRemove(e, id)}
+        >
+          Remove
+        </button>
+        </div>
+      ) : null}
+    </div>
+  );
+};
 
 const Questions = ({ session }) => {
   const [filteredData, setFilteredData] = useState<any[]>([]);
@@ -34,9 +92,11 @@ const Questions = ({ session }) => {
   };
   const handleQuestion = (e: any, id: any) => {
     e.stopPropagation();
+    e.preventDefault();
     setQuestion((prevState) => (prevState === 0 ? id : 0));
   };
-  const handleRemove = (id: string) => {
+  const handleRemove = (e, id: string) => {
+    e.stopPropagation();
     setWantDelete(true);
     setWantDeleteQuestionId(id);
   };
@@ -73,6 +133,32 @@ const Questions = ({ session }) => {
       clearInterval(i_id);
     };
   }, [postMutation, queryInfo]);
+  // Keeps track of the currently opened item's index (null means all closed)
+  const [openIndex, setOpenIndex] = useState(null);
+
+  // Sample Data Array
+  const faqData = [
+    {
+      id: 1,
+      title: "How does the CSS Grid transition work?",
+      answer: "Instead of transitioning 'height: auto' which CSS cannot naturally calculate, we transition the grid row fraction ('0fr' to '1fr'). This achieves a perfectly smooth CSS-only collapse animation regardless of content length.",
+    },
+    {
+      id: 2,
+      title: "Is this component fully accessible?",
+      answer: "Yes. It uses native semantic HTML buttons with the 'aria-expanded' property toggling dynamically based on state, meeting standard web accessibility criteria.",
+    },
+    {
+      id: 3,
+      title: "Can I customize the colors easily?",
+      answer: "Absolutely. Simply swap out the Tailwind color tokens (e.g., changing 'text-slate-800' to 'text-gray-900' or 'text-indigo-600' to your brand palette colors).",
+    },
+  ];
+
+  const handleToggle = (index) => {
+    // If clicked item is already open, close it; otherwise, open the new one
+    setOpenIndex(openIndex === index ? null : index);
+  };
   return (
     <div className={styles?.question__container}>
       <div className={`${styles.padding__top__bottom1} ${styles.center}`}>
@@ -82,62 +168,56 @@ const Questions = ({ session }) => {
         <Link legacyBehavior href="/">
           <a className="">Back to home page</a>
         </Link>
+        <div className='flex gap-2'>
 
-        <button
-          className="btn btn-border btn-primary"
-          onClick={handleAddQuestion}
-        >
-          Add question
-        </button>
+          <button
+            className="btn btn-border btn-primary"
+            onClick={handleAddQuestion}
+          >
+            Add question
+          </button>
+
+          {!!session ? (
+            <button
+              className="flex gap-2 items-center rounded-full px-4 btn-border btn-remove"
+              onClick={() => signOut()}
+            >
+              <LogOut />
+              Logout
+            </button>
+
+          ) : null}
+        </div>
       </div>
       {!filteredData?.length ? (
         <div>Loading....</div>
       ) : !!filteredData?.length ? (
-        <div className={`ui styled fluid accordion ${styles.customAccordion}`}>
-          {filteredData?.map(({ que, id, userId }) => (
-            <Fragment key={id}>
-              <div
-                className={`title animating ${question === id ? "active" : ""}`}
-                onClick={(e) => handleQuestion(e, id)}
-              >
-                <div>
-                  <i
-                    className={`angle ${
-                      question === id ? "down " : "right"
-                    } icon`}
-                  />
-                  {que}
-                </div>
-                {!!session && session?.user?.id === userId ? (
-                  <button
-                    className="btn btn-border btn-remove"
-                    onClick={() => handleRemove(id)}
-                  >
-                    Remove
-                  </button>
-                ) : null}
-              </div>
-
-              <div
-                className={`content animating ${
-                  question === id ? "active" : "hidden"
-                }`}
-              >
-                <i className="angle right icon" />
-                <span ref={answerRef}>
-                  {answerInfo.isLoading
-                    ? "Loading..."
-                    : answerInfo.isSuccess
-                    ? answerInfo?.data?.answer?.answer
-                    : answerInfo.isError
+        <div className={`ui styled fluid accordion divide-y divide-slate-100 ${styles.customAccordion}`}>
+          {filteredData.map((faq, index) => (
+            <AccordionItem
+              question={question}
+              session={session}
+              key={faq.id}
+              title={faq.que}
+              userId={faq.userId}
+              id={faq.id}
+              answer={answerInfo.isLoading
+                ? "Loading..."
+                : answerInfo.isSuccess
+                  ? answerInfo?.data?.answer?.answer
+                  : answerInfo.isError
                     ? "Something went wrong"
                     : ""}
-                </span>
-              </div>
-            </Fragment>
+              isOpen={openIndex === faq.id}
+              onClick={(e) => {
+                handleToggle(faq.id);
+                handleQuestion(e, faq.id);
+              }
+              }
+              handleRemove={handleRemove}
+            />
           ))}
-        </div>
-      ) : null}
+        </div>) : null}
       <Modal
         userId={session?.user?.id}
         isModalVisible={isModalVisible}

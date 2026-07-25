@@ -5,8 +5,8 @@ import { SessionProvider } from "next-auth/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { ReactQueryDevtools } from "react-query/devtools";
-import "../styles/_globals.scss";
 import Head from "next/head";
+import "../styles/_globals.scss";
 
 const MyApp = ({ Component, pageProps }) => {
   const [queryClient] = useState(() => new QueryClient());
