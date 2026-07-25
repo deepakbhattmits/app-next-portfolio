@@ -14,7 +14,7 @@ use('interview');
 db.getCollection('answers').find();
 // find an answers 
 db.getCollection('answers').findOne({
-    id: 81, $or: [
+    id: "c415acf1-310c-4a60-8454-94a56d2cd180", $or: [
         { id: { $type: "number" } },
         { id: { $type: "string", $regex: /^(?=.*[A-Za-z])(?=.*[0-9])/ } }
     ]
