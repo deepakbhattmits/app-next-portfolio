@@ -5,8 +5,9 @@ const getAnswer = async (req: NextApiRequest, res: NextApiResponse) => {
   const { questionId } = req?.query;
   const client = await connectToDatabase();
   const db = client?.db();
+  console.log('=====>', questionId.length)
   const answer = await db?.collection("answers").findOne({
-    id: questionId.length < 3 ? +questionId : questionId.toString, $or: [
+    id: questionId.length < 3 ? +questionId : questionId, $or: [
       { id: { $type: "number" } },
       { id: { $type: "string", $regex: /^(?=.*[A-Za-z])(?=.*[0-9])/ } }
     ]
